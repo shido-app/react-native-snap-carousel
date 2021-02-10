@@ -452,7 +452,7 @@ export class Carousel<TData> extends React.Component<
   _isMultiple (x: number, y: number) {
       // This prevents Javascript precision issues: https://stackoverflow.com/a/58440614/
       // Required because Android viewport size can return pretty complicated decimals numbers
-      return Math.round(Math.round(x / y) / (1 / y)) === Math.round(x);
+      return  Math.trunc(Math.round(x / y) / (1 / y)) === Math.trunc(x);
   }
 
   _getCustomData (props: CarouselProps<TData> = this.props) {
@@ -956,7 +956,7 @@ export class Carousel<TData> extends React.Component<
       // WARNING: everything in this condition will probably need to be called on _snapToItem as well because:
       // 1. `onMomentumScrollEnd` won't be called if the scroll isn't animated
       // 2. `onMomentumScrollEnd` won't be called at all on Android when scrolling programmatically
-      if (nextActiveItem !== this._activeItem) {
+      if (this.props.loop || nextActiveItem !== this._activeItem) {
           this._activeItem = nextActiveItem;
           onSnapToItem && onSnapToItem(this._getDataIndex(nextActiveItem));
 
