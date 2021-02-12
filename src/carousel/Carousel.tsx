@@ -452,7 +452,7 @@ export class Carousel<TData> extends React.Component<
   _isMultiple (x: number, y: number) {
       // This prevents Javascript precision issues: https://stackoverflow.com/a/58440614/
       // Required because Android viewport size can return pretty complicated decimals numbers
-      return  Math.trunc(Math.round(x / y) / (1 / y)) === Math.trunc(x);
+      return  Math.ceil(Math.round(x / y) / (1 / y)) >= Math.trunc(x)
   }
 
   _getCustomData (props: CarouselProps<TData> = this.props) {
